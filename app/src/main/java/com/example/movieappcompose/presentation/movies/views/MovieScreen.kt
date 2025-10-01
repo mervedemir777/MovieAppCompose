@@ -32,15 +32,13 @@ import com.example.movieappcompose.presentation.Screen
 import com.example.movieappcompose.presentation.movies.MoviesEvent
 import com.example.movieappcompose.presentation.movies.MoviesViewModel
 
-
 @Composable
 fun MovieScreen(
     navController: NavController,
     viewModel : MoviesViewModel = hiltViewModel()
 ) {
 
-    val state = viewModel.state.value     /* ViewModel'daki state objesidir. movies: Film listesi, isLoading:
-                                    error: Hata mesajı verileri vardır.*/
+    val state = viewModel.state.value
 
     Box(modifier = Modifier.fillMaxSize().background(Color.Black)) {
 
@@ -50,15 +48,15 @@ fun MovieScreen(
                 .padding(20.dp),
                 hint = "Batman",
                 onSearch = {
-                    viewModel.onEvent(MoviesEvent.Search(it))   //
+                    viewModel.onEvent(MoviesEvent.Search(it))
                 }
             )
 
-            LazyColumn(modifier = Modifier.fillMaxSize()) {      //
+            LazyColumn(modifier = Modifier.fillMaxSize()) {
                 items(state.movies) { movie ->
                     MovieListRow(movie = movie, onItemClick = {
                         //navigate to details
-                        navController.navigate(Screen.MovieDetailScreen.route+"/${movie.imdbID}")    //
+                        navController.navigate(Screen.MovieDetailScreen.route+"/${movie.imdbID}")
                     })
                 }
             }
@@ -100,13 +98,13 @@ fun MovieSearchBar(
 
     Box(modifier = modifier) {
         TextField(
-            value = text,        // Kullanıcı yazdıkça text değişkenine gider
-            onValueChange = {
-                text =it
-            },
+            value = text,
             keyboardActions = KeyboardActions(onDone = {
                 onSearch(text)
             }),
+            onValueChange = {
+                text =it
+            },
             maxLines = 1,
             singleLine = true,
             textStyle = TextStyle(color = Color.Black),
@@ -119,7 +117,7 @@ fun MovieSearchBar(
                 .shadow(5.dp, CircleShape)
                 .background(Color.White, CircleShape)
                 .padding(horizontal = 20.dp)
-                .onFocusChanged {      // Hiçbir şey yapılmadığı zaman 
+                .onFocusChanged {
                     isHintDisplayed = it.isFocused != true && text.isEmpty()
                 }
         )

@@ -30,18 +30,19 @@ import com.example.movieappcompose.presentation.movie_detail.MovieDetailViewMode
 fun MovieDetailScreen(
     movieDetailViewModel: MovieDetailViewModel = hiltViewModel()
 ) {
-    val state = movieDetailViewModel.state.value
+    val state = movieDetailViewModel.state.value  // UNUTMA
 
-    Box(modifier = Modifier.fillMaxSize()
-        .background(Color.Black)
-        ,contentAlignment = Center
+    Box(
+        modifier = Modifier.fillMaxSize()
+            .background(Color.Black), contentAlignment = Center
     ) {
-        state.movie?.let {
+        state.movie?.let {                //
             Column(
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Image(painter = rememberAsyncImagePainter(data = it.Poster),
+                Image(
+                    painter = rememberAsyncImagePainter(model = it.Poster),
                     contentDescription = it.Title,
                     modifier = Modifier
                         .padding(16.dp)
@@ -50,37 +51,43 @@ fun MovieDetailScreen(
                         .align(CenterHorizontally)
                 )
 
-                Text(text = it.Title,
+                Text(
+                    text = it.Title,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(14.dp),
                     color = Color.White
                 )
 
-                Text(text = it.Year,
+                Text(
+                    text = it.Year,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(14.dp),
                     color = Color.White
                 )
 
-                Text(text = it.Actors,
+                Text(
+                    text = it.Actors,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(14.dp),
                     color = Color.White
                 )
 
-                Text(text = it.Country,
+                Text(
+                    text = it.Country,
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(14.dp),
                     color = Color.White
                 )
 
-                Text(text = "Director: ${it.Director}",
+                Text(
+                    text = "Director: ${it.Director}",
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(14.dp),
                     color = Color.White
                 )
 
-                Text(text = "IMDB Rating: ${it.imdbRating}",
+                Text(
+                    text = "IMDB Rating: ${it.imdbRating}",
                     textAlign = TextAlign.Center,
                     modifier = Modifier.padding(14.dp),
                     color = Color.White
@@ -89,8 +96,9 @@ fun MovieDetailScreen(
             }
         }
 
-        if (state.error.isNotBlank()) {
-            Text(text = state.error,
+        if (state.error.isNotBlank()) {               // Değişkenin boş olup olmadığını kontrol eder.
+            Text(
+                text = state.error,                 // Gösterilecek metin, state.error içeriğidir (yani hata mesajı).
                 color = MaterialTheme.colorScheme.error,
                 textAlign = TextAlign.Center,
                 modifier = Modifier
@@ -100,10 +108,11 @@ fun MovieDetailScreen(
             )
         }
 
-        if(state.isLoading) {
+        if (state.isLoading) {
+            // Ekranda bir dairesel yüklenme göstergesi (spinner) çizer.
             CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
         }
     }
-
-
 }
+
+

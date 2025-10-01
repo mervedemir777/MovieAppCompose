@@ -29,33 +29,38 @@ fun MovieListRow(
     movie : Movie,
     onItemClick : (Movie) -> Unit
 ) {
-    Row(
+    Row(        // İçinde image ve column var.
         modifier = Modifier
             .fillMaxWidth()
-            .clickable { onItemClick(movie) }
+            .clickable {
+                onItemClick(movie)
+            }   // Bütün rowlara tıklanma
             .padding(10.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween   // Boşluk bırakma
     ) {
 
-        Image(painter = rememberAsyncImagePainter(data = movie.Poster),
-            contentDescription = movie.Title,
+        Image(painter = rememberAsyncImagePainter(movie.Poster),    // Model ister
+            contentDescription = movie.Title,        // Görme engelliler için
             modifier = Modifier
                 .padding(16.dp)
                 .size(200.dp, 200.dp)
                 .clip(RectangleShape))
 
-        //Text ve filmi
+                 // Title ve yılın textleri
 
-        Column(modifier = Modifier.align(CenterVertically),horizontalAlignment = Alignment.CenterHorizontally) {
+        Column(
+            modifier = Modifier.align(CenterVertically),
+            horizontalAlignment = Alignment.CenterHorizontally)
+        {
             Text(movie.Title,
-                style = MaterialTheme.typography.h5,
+                style = MaterialTheme.typography.bodyMedium,
                 overflow = TextOverflow.Ellipsis,
                 color = White,
                 textAlign = TextAlign.Center
             )
 
             Text(movie.Year,
-                style = MaterialTheme.typography.h6,
+                style = MaterialTheme.typography.bodySmall,
                 overflow = TextOverflow.Ellipsis,
                 color = White,
                 textAlign = TextAlign.Center

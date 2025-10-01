@@ -2,6 +2,7 @@ package com.example.movieappcompose.presentation.movie_detail
 
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.movieappcompose.domain.use_case.get_movie_detail.GetMovieDetailsUseCase
@@ -16,13 +17,16 @@ import javax.inject.Inject
 @HiltViewModel
 class MovieDetailViewModel @Inject constructor(
     private val getMovieDetailUseCase: GetMovieDetailsUseCase,
+    private val savedStateHandle: SavedStateHandle   // Unutma
 ) : ViewModel()  {
 
-      //
+      // State  tanımlaması
+
     private val _state = mutableStateOf<MovieDetailState>(MovieDetailState())
     val state : State<MovieDetailState> = _state
 
-    //
+      //Route da anahtar seklinde yollanıyorsa
+
     init {
         savedStateHandle.get<String>(IMDB_ID)?.let {
             getMovieDetail(it)
@@ -31,7 +35,7 @@ class MovieDetailViewModel @Inject constructor(
 
 
         private fun getMovieDetail(imdbId: String) {
-            getMovieDetailUseCase.executeGetMovieDetails(imdbId = imdbId).onEach {
+            getMovieDetailUseCase.executeGetMovieDetails(imdbId = imdbId).onEach {   // Flow ise onEach kullanılır
                 when (it) {
                     is Resource.Success -> {
                         _state.value = MovieDetailState(movie = it.data)
