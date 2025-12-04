@@ -15,8 +15,6 @@ interface MovieAPI {
 
     interface MovieAPI {
 
-        //https://omdbapi.com/?apikey=2d6a09f9&s=batman
-        //https://omdbapi.com/?apikey=2d6a09f9&i=tt0372784
 
         @GET(".")    // Base urlden sonra bır sey yazmadıgı ıcın sadece . koyulabilir
         suspend fun getMovies(   //Filmleri alma
