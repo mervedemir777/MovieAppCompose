@@ -5,11 +5,9 @@ package com.example.movieappcompose.util
 
 object Constants {
 
-    // http://www.omdbapi.com/?i=tt3896198&apikey=2d6a09f9
+   
 
-    const val API_KEY =  "2d6a09f9"
-    const val BASE_URL = "http://www.omdbapi.com/"
-    const val IMDB_ID = "imdb_id"
+
 
 }
 
